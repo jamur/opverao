@@ -1,0 +1,42 @@
+﻿<!-- Lista os valores a receber -->
+
+{% extends "estagiarios/base.html" %}
+
+{% block title %}Estagiários com Falta de Pagamento{% endblock %}
+
+{% block content %}
+<h3>Lista dos Estagiários com Falta de Pagamento</h3>
+
+{% if estagiarios %}
+    <table border="1" rules="groups">
+        <tr><th>Nome</th><th>Telefone(s)</th><th>RG</th><th>CPF</th><th>CIEE / UFPR</th>
+        {% for e in estagiarios %}
+          <tbody>
+            <tr>
+                <td>{{ e.nome_do_estagiario }}</td>
+                <td>{{ e.telefones }}</td>
+                <!-- <td>{{ e.falta_pagamento }}</td> -->
+                <td>{{ e.rg }}</td>
+                <td>{{ e.cpf }}</td>
+                <td>{% if e.estudante_da_ufpr %} UFPR {% else %} CIEE - {{ e.numero_no_ciee }} {% endif %}
+            </tr>
+            {% if e.contatamento_set.all %}
+                {% for ct in e.contatamento_set.all %}
+                    <tr>
+                        <td></td>
+                        <td>{{ ct.data_e_hora }}</td>
+                        <td>{{ ct.tipo_de_contatamento }}</td>
+                        <td>{{ ct.ocorrido }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            <tr><td>Faltam: {{ e.pagamento_pendente|floatformat:2 }}</td></tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+          </tbody>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Nao há estagiários cadastrados.</p>
+{% endif %}
+{% endblock %}

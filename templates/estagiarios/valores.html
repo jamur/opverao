@@ -1,0 +1,24 @@
+﻿<!-- Lista os valores a receber -->
+{% extends "estagiarios/base.html" %}
+
+{% block title %}
+    Valores das bolsas de cada estagiário
+{% endblock %}
+
+{% block content %}
+    <h3>Valores das bolsas de cada estagiário</h3>
+    {% if es %}
+        <table>
+            <tr><th>Nome</th><th>Telefone(s)</th><th>Valor da Bolsa</th>
+            {% for e in es %}
+                <tr>
+                    <td>{{ e.nome_do_estagiario }}</td>
+                    <td>{{ e.telefones }}</td>
+                    <td>{{ e.media_dos_valores_dos_blocos }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Nao há estagiários cadastrados.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,16 @@
+﻿<!-- Lista os valores a receber -->
+<h1>Estagiários - Operação Verão</h1>
+
+{% if estagiarios %}
+    <table>
+        <tr><th>Nome</th><th>Telefone(s)</th>
+        {% for e in estagiarios %}
+            <tr>
+                <td>{{ e.nome_do_estagiario }}</td>
+                <td>{{ e.telefones }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Nao há estagiários cadastrados.</p>
+{% endif %}

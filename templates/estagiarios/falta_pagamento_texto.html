@@ -1,0 +1,51 @@
+﻿<!-- Lista os valores a receber -->
+
+{% extends "estagiarios/base.html" %}
+
+{% block title %}Estagiários com Falta de Pagamento{% endblock %}
+
+{% block content %}
+<h3>Lista dos Estagiários com Falta de Pagamento</h3>
+
+{% if estagiarios %}
+        ======================================================================================<br>
+        {% for e in estagiarios %}
+            <br>
+            Nome: {{ e.nome_do_estagiario }}   (
+                {% if e.pagamento_pendente %}
+                    R$ {{ e.pagamento_pendente|floatformat:2 }}
+                {% else %}
+                    A conferir
+                {% endif %}
+                )
+                <br>
+            ----------------------------------------------------------------------------------<br>
+            Fone: {{ e.telefones }}<br>
+                <!-- <td>{{ e.falta_pagamento }}</td> -->
+            R.G.: {{ e.rg }}<br>
+            C.P.F.: {{ e.cpf }}<br>
+            {% if e.estudante_da_ufpr %} UFPR {% else %} CIEE - {{ e.numero_no_ciee }} {% endif %}<br>
+            {% if e.contatamento_set.all %}
+                ------------------------------------------------------------------------------<br>
+                Contatos com o estagiário (telefonemas):  Dia e Hora - Tipo - O que foi conversado<br>
+                {% for ct in e.contatamento_set.all %}
+                        ----{{ ct.data_e_hora }}<br>
+                        ----{{ ct.tipo_de_contatamento }}<br>
+                        ----{{ ct.ocorrido }}<br>
+                        --------------------------------------------<br>
+                {% endfor %}
+            {% endif %}
+            Pagamento pendente (falta pagar): 
+            {% if e.pagamento_pendente %}
+                R$ {{ e.pagamento_pendente|floatformat:2 }}
+            {% else %}
+                Não consegui contato.
+            {% endif %}
+            <br>
+            ====================================================================================<br>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Nao há estagiários cadastrados.</p>
+{% endif %}
+{% endblock %}

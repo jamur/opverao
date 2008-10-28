@@ -1,0 +1,25 @@
+﻿<!-- Lista os valores a receber -->
+
+{% extends "estagiarios/base.html" %}
+
+{% block title %}{% if com_telefones %}Telefones{% else %}Lista de Nomes{% endif %} dos Estagiários{% endblock %}
+
+{% block content %}
+<h3>{% if com_telefones %}Telefones{% else %}Lista de Nomes{% endif %} dos Estagiários</h3>
+
+{% if estagiarios %}
+    <table>
+        <tr><th>Nome</th>{% if com_telefones %}<th>Telefone(s)</th>{% endif %}
+        {% for e in estagiarios %}
+            <tr>
+                <td>{{ e.nome_do_estagiario }}</td>
+                {% if com_telefones %}
+                    <td>{{ e.telefones }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Nao há estagiários cadastrados.</p>
+{% endif %}
+{% endblock %}
