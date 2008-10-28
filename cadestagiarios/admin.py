@@ -1,4 +1,5 @@
-from cadestagiarios/.models import Banco, Projeto, Cidade, Estado, ConjAtividade, Atividade, ConjAtividadeEspecifica, AtividadeEspecifica, Coordenador, SubProjeto, InstituicaoDeEnsino, Curso, Estagiario, Local, EstadoDoDocumento, TipoDeDocumento, Documento, TipoDePendencia, Pendencia, TipoDeContatamento, Contatamento, Instituicao, Contato, ItemFotografado, Foto
+#-*- coding: utf-8 -*-
+from cadestagiarios.models import Banco, Projeto, Cidade, Estado, ConjAtividade, Atividade, ConjAtividadeEspecifica, AtividadeEspecifica, Coordenador, SubProjeto, InstituicaoDeEnsino, Curso, Estagiario, Local, EstadoDoDocumento, TipoDeDocumento, Documento, TipoDePendencia, Pendencia, TipoDeContatamento, Contatamento, Instituicao, Contato, ItemFotografado, Foto
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -24,7 +25,7 @@ class Foto_Inline(admin.TabularInline):
 class DocumentoOptions(admin.ModelAdmin):
     list_display = ('estagiario','tipo_de_documento','local_atual','preenchido','assinado')
     list_filter = ('tipo_de_documento','local_atual','data_de_envio_ou_chegada','preenchido','assinado','estagiario')
-    search_fieldsets = ['estagiario']       # não funcionou com foreign
+    search_fieldsets = ['estagiario']       # nao funcionou com foreign
 
 class ContatamentoOptions(admin.ModelAdmin):
     list_display = ('estagiario','data_e_hora','tipo_de_contatamento','ocorrido','pag_ok')

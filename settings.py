@@ -3,7 +3,7 @@ onde = 'linux'
 diretorios = {'windows':
                         {'templates':'C:/Rafael/cade/opverao/templates/'},
               'linux'  :
-                        {'templates':'/home/ss/prog/django/cade/opverao/templates/'}
+                        {'templates':'/home/rafael/prog/opverao/templates/'}
              }
 #import deseb
 DEBUG = True
