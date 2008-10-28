@@ -48,7 +48,7 @@ class ConjAtividade(models.Model):
     
 class Atividade(models.Model):
     conjatividade = models.ForeignKey(ConjAtividade)
-    atividade = models.TextField(core=True)
+    atividade = models.TextField()
 
 class ConjAtividadeEspecifica(models.Model):
     descricaoounome = models.CharField('Descrição', max_length=25)
@@ -59,7 +59,7 @@ class ConjAtividadeEspecifica(models.Model):
 #Atividade especifica do curso do estudante
 class AtividadeEspecifica(models.Model):
     conjatividade = models.ForeignKey(ConjAtividadeEspecifica)
-    atividade = models.TextField(core=True)
+    atividade = models.TextField()
 
 class ConjConjAtividades(models.Model):
     descricaoounome = models.CharField('Descrição', max_length=25)
@@ -247,7 +247,7 @@ class TipoDeDocumento(models.Model):
 class Documento(models.Model):
     estagiario = models.ForeignKey(Estagiario)
     #tipo = models.CharField('desconsiderar este campo',max_length = 50, blank=True)
-    tipo_de_documento = models.ForeignKey(TipoDeDocumento, core=True, blank=True, null=True)
+    tipo_de_documento = models.ForeignKey(TipoDeDocumento, blank=True, null=True)
     local_atual = models.ForeignKey(Local, blank=True, null=True)
     data_de_envio_ou_chegada = models.DateTimeField(blank=True, null=True)
     preenchido = models.BooleanField(blank=True, null=True)
@@ -277,7 +277,7 @@ class TipoDePendencia(models.Model):
         
 class Pendencia(models.Model):
     estagiario = models.ForeignKey(Estagiario, num_extra_on_change=1)
-    tipo_de_pendencia = models.ForeignKey(TipoDePendencia, core=True)
+    tipo_de_pendencia = models.ForeignKey(TipoDePendencia)
     data_da_atualizacao = models.DateField(auto_now=True, null=True)
     
     #class Meta:
@@ -295,7 +295,7 @@ class TipoDeContatamento(models.Model):
 class Contatamento(models.Model):
     estagiario = models.ForeignKey(Estagiario, num_extra_on_change=1)
     data_e_hora = models.DateTimeField()
-    tipo_de_contatamento = models.ForeignKey(TipoDeContatamento, core=True, blank=True, null=True)
+    tipo_de_contatamento = models.ForeignKey(TipoDeContatamento, blank=True, null=True)
     ocorrido = models.CharField(max_length = 100, blank=True, null=True)
     
     def __unicode__(self):
@@ -327,7 +327,7 @@ class ItemFotografado(models.Model):
         return self.nome
         
 class Foto(models.Model):
-    desc = models.CharField(max_length = 200, blank=True, core=True)
-    foto = models.ImageField(upload_to="fotos", core=True)
+    desc = models.CharField(max_length = 200, blank=True)
+    foto = models.ImageField(upload_to="fotos")
     item_fotografado = models.ForeignKey(ItemFotografado)
     
