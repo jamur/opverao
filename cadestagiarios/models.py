@@ -11,9 +11,6 @@ class Banco(models.Model):
     def __unicode__(self):
         return self.nome_do_banco
 
-    class Admin:
-        list_display = ('numero_do_banco', 'nome_do_banco')
-
 class Projeto(models.Model):
     numero_do_projeto = models.IntegerField('Número do Projeto na Funpar')
     nome_do_projeto = models.CharField('Nome do Projeto', max_length = 50, unique = True)
@@ -24,9 +21,6 @@ class Projeto(models.Model):
     def __unicode__(self):
         return self.nome_do_projeto
 
-    class Admin:
-        list_display = ('numero_do_projeto', 'nome_do_projeto')
-
 class Cidade(models.Model):
     cidade = models.CharField('Cidade', max_length=35)
 
@@ -35,8 +29,6 @@ class Cidade(models.Model):
     
     class Meta:
         ordering = ('cidade',)
-    class Admin:
-        pass
 
 class Estado(models.Model):
     sigla = models.USStateField()
@@ -48,18 +40,12 @@ class Estado(models.Model):
     #class Meta:
     #    ordering = ('nome',)
     
-    class Admin:
-        pass
-
 class ConjAtividade(models.Model):
     descricaoounome = models.CharField('Descrição', max_length=25)
     
     def __unicode__(self):
         return self.descricaoounome
     
-    class Admin:
-        pass
-
 class Atividade(models.Model):
     conjatividade = models.ForeignKey(ConjAtividade, edit_inline=models.STACKED, num_in_admin=1)
     atividade = models.TextField(core=True)
@@ -69,9 +55,6 @@ class ConjAtividadeEspecifica(models.Model):
 
     def __unicode__(self):
         return self.descricaoounome
-
-    class Admin:
-        pass
 
 #Atividade especifica do curso do estudante
 class AtividadeEspecifica(models.Model):
@@ -96,9 +79,6 @@ class Coordenador(models.Model):
     #class Meta:
     #    ordering = ('nome',)
         
-    class Admin:
-        list_display = ('nome','telefone')
-
 class SubProjeto(models.Model):
     BALNRES = (('Balneabilidade','Balneabilidade'),('Resíduos','Resíduos'),('QG','Administração'),('ARRUMAR','ARRUMAR'))
     balnres = models.CharField('Balneabilidade / Residuos', max_length = 23, choices=BALNRES)
@@ -111,9 +91,6 @@ class SubProjeto(models.Model):
     #class Meta:
     #    ordering = ('coordenador',)
         
-    class Admin:
-        pass
-
 class InstituicaoDeEnsino(models.Model):
     nome = models.CharField(max_length = 75)
     
@@ -123,19 +100,12 @@ class InstituicaoDeEnsino(models.Model):
     #class Meta:
     #    ordering = ('nome',)
         
-    class Admin:
-        pass
-        
 class Curso(models.Model):
     nome_do_curso = models.CharField(max_length = 100)
     
     def __unicode__(self):
         return self.nome_do_curso
         
-    class Admin:
-        pass
-    
-
 class Estagiario(models.Model):
     projeto = models.ForeignKey(Projeto)
     nome_do_estagiario = models.CharField("Nome", max_length=70)
@@ -239,45 +209,8 @@ class Estagiario(models.Model):
         else:    
             return None
     verificado.boolean=True
-    
-    class Admin:
-        fields = (
-            (None, {'fields':(
-                    'nome_do_estagiario','falta_pagamento','reclamou_pagamento',
-                    'verificar_pagamento', 'email', 'subprojeto','numero_no_ciee',
-                    'rg','cpf','num_matricula_ufpr','obs','pagamento_pendente')}),
-            ('Telefones', {'fields':
-                    ('telefones',)}),
-            ('Filiação', {'fields':('nome_da_mae','data_nasc_mae')}),
-            ('Outros', {'fields':('projeto','nome_do_solicitante')}),
-            ('Banco',{'fields':('banco','agencia', 'conta_corrente')}),
-            ('Endereço', {'fields':('end_rua', 'end_num', 'end_compl', 'end_bairro',
-                                    'end_cidade','end_estado')}),
-            #('Atividades', {'fields':('conj_atividades',)}),
-            ('Períodos / Blocos', {'fields':('bloco1', 'bloco2')}),
-            ('Instituição de Ensino', 
-                {'fields':('instituicao_de_ensino','estudante_da_ufpr','curso')}),
-            ('Valor da Bolsa', {'fields':('bloco1_valor','bloco2_valor'),'classes':'collapse'}),
-            ('Período do Estágio', 
-                {'fields':('data_prevista_para_inicio','data_prevista_para_termino','data_de_inicio_do_estagio','data_de_termino_do_estagio')}),
-            #('Testes', {'fields':('teste2',)}),
-            )
-        list_display = (
-            #'nome_do_estagiario', 'telefones', 'cpf','rg','pag_ok','recpag_ok','verificado',
-            'nome_do_estagiario', 'telefones','pag_ok', #,'nao_reclamou','verificado',
-            #'nome_do_estagiario', 'telefones', 'cpf','rg','falta_pagamento','reclamou_pagamento','verificar_pagamento',
-            'data_de_inicio_do_estagio','data_de_termino_do_estagio')
-        #list_display = ('nome_do_estagiario','telefones')
-        #list_filter = ('estudante_da_ufpr',)
-        list_per_page = 25
-        search_fields = ['nome_do_estagiario']
-        list_filter = ('falta_pagamento','reclamou_pagamento', 'verificar_pagamento', 'subprojeto','instituicao_de_ensino','end_cidade')#,'data_da_ultima_atualizacao','data_do_cadastro')
-        ordering = ('nome_do_estagiario',)
-        save_on_top = True
-        #date_hierarchy = 'data_da_ultima_atualizacao'
-        
 
-#class SuperEstagiario(Estagiario):
+   #class SuperEstagiario(Estagiario):
 #    super_nome = models.CharField(max_length = 10, blank=True)
 #    teste2 = models.IntegerField(blank=True)
 #    
@@ -295,9 +228,6 @@ class Local(models.Model):
     #class Meta:
     #    ordering = ('nome_do_local',)
     
-    class Admin:
-        pass
-
 #class Contrato(models.Model):
 #    local_atual = models.ForeignKey(Local)
 #    obs = models.TextField()
@@ -308,18 +238,12 @@ class EstadoDoDocumento(models.Model):
     def __unicode__(self):
         return self.estado
     
-    class Admin:
-        list_filter = ('estado',)
-    
 class TipoDeDocumento(models.Model):
     tipo = models.CharField(max_length=60)
     
     def __unicode__(self):
         return self.tipo
     
-    class Admin:
-        pass
-
 class Documento(models.Model):
     estagiario = models.ForeignKey(Estagiario)
     #tipo = models.CharField('desconsiderar este campo',max_length = 50, blank=True)
@@ -338,11 +262,6 @@ class Documento(models.Model):
     class Meta:
         ordering = ('estagiario',)
         
-    class Admin:
-        list_display = ('estagiario','tipo_de_documento','local_atual','preenchido','assinado')
-        list_filter = ('tipo_de_documento','local_atual','data_de_envio_ou_chegada','preenchido','assinado','estagiario')
-        search_fields = ['estagiario']       # não funcionou com foreign
-
 #class ConjDeDocumentos(models.Model):
     #documento = models.ForeignKey(Documento)
     #estagiario = models.OneToOneField(Estagiario)
@@ -356,9 +275,6 @@ class TipoDePendencia(models.Model):
     #class Meta:
     #    ordering = ('tipo',)
         
-    class Admin:
-        pass
-        
 class Pendencia(models.Model):
     estagiario = models.ForeignKey(Estagiario, edit_inline=models.TABULAR, num_in_admin=1, num_extra_on_change=1)
     tipo_de_pendencia = models.ForeignKey(TipoDePendencia, core=True)
@@ -370,20 +286,12 @@ class Pendencia(models.Model):
     def __unicode__(self):
         return u"%s  -  %s" % (self.estagiario, self.tipo_de_pendencia)
     
-    class Admin:
-        list_filter = ('tipo_de_pendencia','data_da_atualizacao','estagiario')
-        #search_fields = ('estagiario',)
-        date_hierarchy = 'data_da_atualizacao'
-
 class TipoDeContatamento(models.Model):
     descricao_do_tipo = models.CharField(max_length=50)
     
     def __unicode__(self):
         return self.descricao_do_tipo
     
-    class Admin:
-        pass
-        
 class Contatamento(models.Model):
     estagiario = models.ForeignKey(Estagiario, edit_inline=models.TABULAR, num_in_admin=1, num_extra_on_change=1)
     data_e_hora = models.DateTimeField()
@@ -397,20 +305,12 @@ class Contatamento(models.Model):
         return self.estagiario.pag_ok()
     pag_ok.boolean = True
     
-    class Admin:
-        list_display = ('estagiario','data_e_hora','tipo_de_contatamento','ocorrido','pag_ok')
-        date_hierarchy = 'data_e_hora'
-        
-        
 class Instituicao(models.Model):
     nome = models.CharField(max_length = 85)
     
     def __unicode__(self):
         return self.nome
     
-    class Admin:
-        pass
-        
 class Contato(models.Model):
     nome = models.CharField(max_length = 75)
     telefone = models.CharField(max_length = 45)
@@ -419,11 +319,6 @@ class Contato(models.Model):
     def __unicode__(self):
         return self.nome
     
-    class Admin:
-        list_display = ('nome', 'instituicao','telefone')
-        search_fields = ('nome','instituicao')
- 
-        
 class ItemFotografado(models.Model):
     " Pode conter várias fotos "
     nome = models.CharField(max_length = 100)
@@ -431,9 +326,6 @@ class ItemFotografado(models.Model):
     def __unicode__(self):
         return self.nome
         
-    class Admin:
-        pass
-
 class Foto(models.Model):
     desc = models.CharField(max_length = 200, blank=True, core=True)
     foto = models.ImageField(upload_to="fotos", core=True)
