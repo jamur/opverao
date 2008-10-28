@@ -276,7 +276,7 @@ class TipoDePendencia(models.Model):
     #    ordering = ('tipo',)
         
 class Pendencia(models.Model):
-    estagiario = models.ForeignKey(Estagiario, num_extra_on_change=1)
+    estagiario = models.ForeignKey(Estagiario)
     tipo_de_pendencia = models.ForeignKey(TipoDePendencia)
     data_da_atualizacao = models.DateField(auto_now=True, null=True)
     
@@ -293,7 +293,7 @@ class TipoDeContatamento(models.Model):
         return self.descricao_do_tipo
     
 class Contatamento(models.Model):
-    estagiario = models.ForeignKey(Estagiario, num_extra_on_change=1)
+    estagiario = models.ForeignKey(Estagiario)
     data_e_hora = models.DateTimeField()
     tipo_de_contatamento = models.ForeignKey(TipoDeContatamento, blank=True, null=True)
     ocorrido = models.CharField(max_length = 100, blank=True, null=True)
