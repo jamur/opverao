@@ -134,7 +134,7 @@ class Estagiario(models.Model):
     data_prevista_para_termino = models.DateField('Data Prevista para Término', null=True, blank=True)
 
     email = models.EmailField(null=True, blank=True)
-    num_matricula_ufpr = models.CharField(max_length=25, null=True, blank=True, aka='num_matricula')
+    num_matricula_ufpr = models.CharField(max_length=25, null=True, blank=True)
     
     data_da_ultima_atualizacao = models.DateField(auto_now=True, null=True)
     data_do_cadastro = models.DateField(auto_now_add=True, null=True)
