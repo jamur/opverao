@@ -31,7 +31,7 @@ class Cidade(models.Model):
         ordering = ('cidade',)
 
 class Estado(models.Model):
-    sigla = models.USStateField()
+    sigla = models.CharField(max_length = 2)
     nome = models.CharField(max_length = 35)
     
     def __unicode__(self):
@@ -47,7 +47,7 @@ class ConjAtividade(models.Model):
         return self.descricaoounome
     
 class Atividade(models.Model):
-    conjatividade = models.ForeignKey(ConjAtividade, edit_inline=models.STACKED, num_in_admin=1)
+    conjatividade = models.ForeignKey(ConjAtividade, num_in_admin=1)
     atividade = models.TextField(core=True)
 
 class ConjAtividadeEspecifica(models.Model):
@@ -58,7 +58,7 @@ class ConjAtividadeEspecifica(models.Model):
 
 #Atividade especifica do curso do estudante
 class AtividadeEspecifica(models.Model):
-    conjatividade = models.ForeignKey(ConjAtividadeEspecifica, edit_inline=models.TABULAR, num_in_admin=1)
+    conjatividade = models.ForeignKey(ConjAtividadeEspecifica, num_in_admin=1)
     atividade = models.TextField(core=True)
 
 class ConjConjAtividades(models.Model):
@@ -276,7 +276,7 @@ class TipoDePendencia(models.Model):
     #    ordering = ('tipo',)
         
 class Pendencia(models.Model):
-    estagiario = models.ForeignKey(Estagiario, edit_inline=models.TABULAR, num_in_admin=1, num_extra_on_change=1)
+    estagiario = models.ForeignKey(Estagiario, num_in_admin=1, num_extra_on_change=1)
     tipo_de_pendencia = models.ForeignKey(TipoDePendencia, core=True)
     data_da_atualizacao = models.DateField(auto_now=True, null=True)
     
@@ -293,7 +293,7 @@ class TipoDeContatamento(models.Model):
         return self.descricao_do_tipo
     
 class Contatamento(models.Model):
-    estagiario = models.ForeignKey(Estagiario, edit_inline=models.TABULAR, num_in_admin=1, num_extra_on_change=1)
+    estagiario = models.ForeignKey(Estagiario, num_in_admin=1, num_extra_on_change=1)
     data_e_hora = models.DateTimeField()
     tipo_de_contatamento = models.ForeignKey(TipoDeContatamento, core=True, blank=True, null=True)
     ocorrido = models.CharField(max_length = 100, blank=True, null=True)
@@ -329,5 +329,5 @@ class ItemFotografado(models.Model):
 class Foto(models.Model):
     desc = models.CharField(max_length = 200, blank=True, core=True)
     foto = models.ImageField(upload_to="fotos", core=True)
-    item_fotografado = models.ForeignKey(ItemFotografado, edit_inline=models.TABULAR)
+    item_fotografado = models.ForeignKey(ItemFotografado)
     

@@ -5,7 +5,7 @@ diretorios = {'windows':
               'linux'  :
                         {'templates':'/home/ss/prog/django/cade/opverao/templates/'}
              }
-import deseb
+#import deseb
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
