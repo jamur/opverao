@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <title>{% block title %}Cadastro de Estagiários - Operação Verão 2007/2008{% endblock %}</title>
+</head>
+
+<body>
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/admin/">Admin</a></li>
+            <li><a href="/admin/cadestagiarios/estagiario/">Admin / Cadastro de Estagiários</a></li>
+            <li><a href="/valores/">Valores</a></li>
+            <li><a href="/nomes/">Nomes (em ordem alfabética)</a></li>
+            <li><a href="/telefones/">Telefones dos Estagiários</a></li>
+            <li><a href="/falta_pagamento/">Estagiários com falta de pagamento</a></li>
+            <li><a href="/falta_pagamento_texto/">Estagiários com falta de pagamento - Modo texto</a></li>
+            <li><a href="/falta_pagamento_texto_so_valor/">Estagiários com falta de pagamento - Modo Texto - Só Valor</a></li>
+            <!-- <li><a href="/blog/">Blog</a></li> -->
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
