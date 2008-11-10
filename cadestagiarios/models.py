@@ -331,3 +331,10 @@ class Foto(models.Model):
     foto = models.ImageField(upload_to="fotos")
     item_fotografado = models.ForeignKey(ItemFotografado)
     
+class Avaliacao(models.Model):
+    estagiario = models.ForeignKey(Estagiario)
+
+    #jteste
+    #testando
+    #ok
+    pass 
