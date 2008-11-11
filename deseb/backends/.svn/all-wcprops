@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/80/trunk/src/deseb/backends
+END
+postgresql_psycopg2.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/24/trunk/src/deseb/backends/postgresql_psycopg2.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/6/trunk/src/deseb/backends/__init__.py
+END
+postgresql.py
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/!svn/ver/77/trunk/src/deseb/backends/postgresql.py
+END
+sqlite3.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/80/trunk/src/deseb/backends/sqlite3.py
+END
+mysql.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/79/trunk/src/deseb/backends/mysql.py
+END

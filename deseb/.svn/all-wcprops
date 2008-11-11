@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/80/trunk/src/deseb
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/!svn/ver/80/trunk/src/deseb/__init__.py
+END
+schema_evolution.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/80/trunk/src/deseb/schema_evolution.py
+END

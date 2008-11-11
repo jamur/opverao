@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/73/trunk/src/deseb/management/commands
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/16/trunk/src/deseb/management/commands/__init__.py
+END
+sqlevolve.py
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/59/trunk/src/deseb/management/commands/sqlevolve.py
+END
+evolvedb.py
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/73/trunk/src/deseb/management/commands/evolvedb.py
+END
+fingerprint.py
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/64/trunk/src/deseb/management/commands/fingerprint.py
+END
