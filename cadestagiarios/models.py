@@ -352,4 +352,4 @@ class AvaliacaoDeEstagiario(models.Model):
     parecer_sobre_o_desempenho_do_estagiario = models.TextField('Com base na avaliação, emita parecer sobre o desempenho do estagiário')
     modalidade_de_supervisao = models.CharField(max_length=15, choices=MODALIDADE_DE_SUPERVISAO) #jteste #testando #ok pass 
 
-
+#teste
