@@ -169,6 +169,8 @@ class Estagiario(models.Model):
     verificar_pagamento = models.BooleanField('Verif. Pag.', null=True, blank=True)
     curso = models.ForeignKey(Curso, null=True, blank=True)
     pagamento_pendente = models.DecimalField(max_digits=7, decimal_places = 2, null=True, blank=True)
+
+    texto1 = models.TextField(blank=True, null=True)
     
     def cidade_do_subprojeto(self):
         return self.subprojeto.cidade

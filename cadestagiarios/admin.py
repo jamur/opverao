@@ -52,6 +52,8 @@ class EstagiarioOptions(admin.ModelAdmin):
         ('Valor da Bolsa', {'fields':('bloco1_valor','bloco2_valor'),'classes': ('collapse',)}),
         ('Período do Estágio', 
             {'fields':('data_prevista_para_inicio','data_prevista_para_termino','data_de_inicio_do_estagio','data_de_termino_do_estagio')}),
+	('Textos',
+	    {'fields':('texto1',)}),
         #('Testes', {'fields':('teste2',)}),
         )
     list_display = (
