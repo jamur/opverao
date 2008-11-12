@@ -369,7 +369,7 @@ class AvaliacaoDeEstagiario(models.Model):
     horas_supervisor = models.FloatField()
 
     def __unicode__(self):
-        return self.estagiario
+        return self.estagiario.nome_do_estagiario
 
     class Meta:
         verbose_name_plural = "Avaliações de Estagiários" 
