@@ -333,23 +333,45 @@ class Foto(models.Model):
     foto = models.ImageField(upload_to="fotos")
     item_fotografado = models.ForeignKey(ItemFotografado)
     
+class AvaliacaoDeTodosOsEstagiarios(models.Model):
+    """Compreende a avaliação de todos os estagiários, o conjunto """
+    nome_da_operacao = models.CharField(max_length=50)
+    data = models.DateField()
+
+    def __unicode__(self):
+        return self.nome_da_operacao
+
+    class Meta:
+        verbose_name_plural = "Operações"
+        verbose_name = "Operação"
+
 
 CRITERIOS = (('MB','Muito Bom'), ('B', 'Bom'), ('R', 'Regular'), ('I', 'Insuficiente'))
 MODALIDADE_DE_SUPERVISAO = (('D','Direta'), ('S','Semi-Direta'), ('I', 'Indireta'))
 
 class AvaliacaoDeEstagiario(models.Model):
+    operacao = models.ForeignKey(AvaliacaoDeTodosOsEstagiarios)
     estagiario = models.ForeignKey(Estagiario)
     assiduidade = models.CharField(max_length=2, choices = CRITERIOS)
     criatividade = models.CharField(max_length=2, choices = CRITERIOS)
     iniciativa = models.CharField(max_length=2, choices = CRITERIOS)
-    responsabilidade = models.CharField(max_length=2, choices = CRITERIOS)
+    responsabilidade = models.CharField("Responsab.",max_length=2, choices = CRITERIOS)
     conduta = models.CharField(max_length=2, choices = CRITERIOS)
-    dominio_do_conhecimento_tecnico = models.Charfield(max_lenth=2, choices = CRITERIOS)
+    dominio_do_conhecimento_tecnico = models.CharField(max_length=2, choices = CRITERIOS)
     dominio_de_habilidades_necessarias_ao_desempenho = models.CharField(max_length=2, choices = CRITERIOS)
     outros = models.CharField(max_length=2, choices = CRITERIOS)
 
     total_de_horas_efetivamente_realizadas = models.FloatField()
     parecer_sobre_o_desempenho_do_estagiario = models.TextField('Com base na avaliação, emita parecer sobre o desempenho do estagiário')
-    modalidade_de_supervisao = models.CharField(max_length=15, choices=MODALIDADE_DE_SUPERVISAO) #jteste #testando #ok pass 
+    modalidade_de_supervisao = models.CharField(max_length=15, choices=MODALIDADE_DE_SUPERVISAO,
+                help_text = "Definir qual a modalidade de supervisão") #jteste #testando #ok pass 
+    horas_orientador = models.FloatField()
+    horas_supervisor = models.FloatField()
+
+    def __unicode__(self):
+        return self.estagiario
+
+    class Meta:
+        verbose_name_plural = "Avaliações de Estagiários" 
 
 #teste

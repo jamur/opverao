@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-from cadestagiarios.models import Banco, Projeto, Cidade, Estado, ConjAtividade, Atividade, ConjAtividadeEspecifica, AtividadeEspecifica, Coordenador, SubProjeto, InstituicaoDeEnsino, Curso, Estagiario, Local, EstadoDoDocumento, TipoDeDocumento, Documento, TipoDePendencia, Pendencia, TipoDeContatamento, Contatamento, Instituicao, Contato, ItemFotografado, Foto
+from cadestagiarios.models import Banco, Projeto, Cidade, Estado, ConjAtividade, Atividade, ConjAtividadeEspecifica, AtividadeEspecifica, Coordenador, SubProjeto, InstituicaoDeEnsino, Curso, Estagiario, Local, EstadoDoDocumento, TipoDeDocumento, Documento, TipoDePendencia, Pendencia, TipoDeContatamento, Contatamento, Instituicao, Contato, ItemFotografado, Foto, AvaliacaoDeEstagiario, AvaliacaoDeTodosOsEstagiarios
 from django.contrib import admin
 from django.utils.translation import ugettext_lazy as _
 
@@ -100,6 +100,37 @@ class PendenciaOptions(admin.ModelAdmin):
     #search_fieldsets = ('estagiario',)
     date_hierarchy = 'data_da_atualizacao'
 
+class AvaliacaoDeEstagiarioOptions(admin.ModelAdmin):
+    fieldsets = (
+        ('1. Identificação do Estagiário', {'fields':(
+            'operacao','estagiario')}),
+        ('2. Critérios para Avaliação', {'fields':
+            ('assiduidade','criatividade','iniciativa','responsabilidade',
+             'conduta','dominio_do_conhecimento_tecnico',
+             'dominio_de_habilidades_necessarias_ao_desempenho','outros',
+             'total_de_horas_efetivamente_realizadas',)}),
+        ('3. Desempenho do Estagiario', {'fields':('parecer_sobre_o_desempenho_do_estagiario',)}),
+        ('4. Supervisão',{'fields':
+            ('modalidade_de_supervisao','horas_orientador','horas_supervisor')})
+        )
+     
+    radio_fields = {"assiduidade":admin.HORIZONTAL,
+                    "criatividade":admin.HORIZONTAL,
+                    "iniciativa":admin.HORIZONTAL,
+                    "responsabilidade":admin.HORIZONTAL,
+                    "conduta":admin.HORIZONTAL,
+                    "dominio_do_conhecimento_tecnico":admin.HORIZONTAL,
+                    "dominio_de_habilidades_necessarias_ao_desempenho":admin.HORIZONTAL,
+                    "outros":admin.HORIZONTAL
+    }
+
+    """Este não funciona 
+    radio_fields = {("assiduidade","criatividade",
+                    "iniciativa","responsabilidade",
+                    "conduta") : admin.HORIZONTAL
+    }
+    """
+
 admin.site.register(TipoDeDocumento)
 admin.site.register(InstituicaoDeEnsino)
 admin.site.register(Curso)
@@ -122,4 +153,5 @@ admin.site.register(EstadoDoDocumento, EstadoDoDocumentoOptions)
 admin.site.register(Banco, BancoOptions)
 admin.site.register(TipoDePendencia)
 admin.site.register(Pendencia, PendenciaOptions)
-
+admin.site.register(AvaliacaoDeEstagiario, AvaliacaoDeEstagiarioOptions)
+admin.site.register(AvaliacaoDeTodosOsEstagiarios)

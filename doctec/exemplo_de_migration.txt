@@ -1,0 +1,33 @@
+^Cnois@rasinies:/home/rafael/prog/opverao$ ./manage.py evolvedb
+cadestagiarios: the following schema upgrade is available:
+CREATE TABLE "cadestagiarios_avaliacaodetodososestagiarios" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "nome_da_operacao" varchar(50) NOT NULL,
+    "data" date NOT NULL
+)
+;
+-- FYI: sqlite does not support adding primary keys or unique or not null fields
+-- FYI: so we create a new "cadestagiarios_avaliacaodeestagiario" and delete the old 
+-- FYI: this could take a while if you have a lot of data
+ALTER TABLE "cadestagiarios_avaliacaodeestagiario" RENAME TO "cadestagiarios_avaliacaodeestagiario_1337_TMP";
+CREATE TABLE "cadestagiarios_avaliacaodeestagiario" (
+    "id" integer NOT NULL PRIMARY KEY,
+    "operacao_id" integer NOT NULL REFERENCES "cadestagiarios_avaliacaodetodososestagiarios" ("id"),
+    "estagiario_id" integer NOT NULL REFERENCES "cadestagiarios_estagiario" ("id"),
+    "assiduidade" varchar(2) NOT NULL,
+    "criatividade" varchar(2) NOT NULL,
+    "iniciativa" varchar(2) NOT NULL,
+    "responsabilidade" varchar(2) NOT NULL,
+    "conduta" varchar(2) NOT NULL,
+    "dominio_do_conhecimento_tecnico" varchar(2) NOT NULL,
+    "dominio_de_habilidades_necessarias_ao_desempenho" varchar(2) NOT NULL,
+    "outros" varchar(2) NOT NULL,
+    "total_de_horas_efetivamente_realizadas" real NOT NULL,
+    "parecer_sobre_o_desempenho_do_estagiario" text NOT NULL,
+    "modalidade_de_supervisao" varchar(15) NOT NULL
+)
+;
+INSERT INTO "cadestagiarios_avaliacaodeestagiario" SELECT "id",'',"estagiario_id","assiduidade","criatividade","iniciativa","responsabilidade","conduta","dominio_do_conhecimento_tecnico","dominio_de_habilidades_necessarias_ao_desempenho","outros","total_de_horas_efetivamente_realizadas","parecer_sobre_o_desempenho_do_estagiario","modalidade_de_supervisao" FROM "cadestagiarios_avaliacaodeestagiario_1337_TMP";
+DROP TABLE "cadestagiarios_avaliacaodeestagiario_1337_TMP";
+do you want to run the preceeding commands?
+
