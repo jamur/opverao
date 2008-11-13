@@ -42,6 +42,7 @@ def avaliacao(request):
     resposta['Content-Disposition'] = 'attachment; filename=avaliacoes.csv'
 
     writer = csv.writer(resposta)
+    #writer = csv.writer(resposta, dialect="excel", delimiter=";")
     writer.writerow(['nome','curso','inicio','fim',
                     'ass_mb','ass_b','ass_r','ass_i',
                     'cri_mb','cri_b','cri_r','cri_i',
@@ -122,7 +123,11 @@ def avaliacao(request):
         data_dia = datetime.now().day
         data_mes = datetime.now().month
         data_ano = datetime.now().year
-       
+      
+        #problema com unicode
+        nome = nome.encode("utf-8")
+        curso = curso.encode("utf-8") 
+        
         writer.writerow([nome,curso,inicio,fim,
                     ass_mb,ass_b,ass_r,ass_i,
                     cri_mb,cri_b,cri_r,cri_i,
