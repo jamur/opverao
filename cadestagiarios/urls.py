@@ -10,4 +10,5 @@ urlpatterns = patterns('opverao.cadestagiarios.relatorios',
     (r'^falta_pagamento/$', 'falta_pagamento'),
     (r'^falta_pagamento_texto/$', 'falta_pagamento_texto'),
     (r'^falta_pagamento_texto_so_valor/$', 'falta_pagamento_texto_so_valor'),
+    (r'^avaliacao/$','avaliacao'),
 )

@@ -111,8 +111,12 @@ class AvaliacaoDeEstagiarioOptions(admin.ModelAdmin):
              'total_de_horas_efetivamente_realizadas',)}),
         ('3. Desempenho do Estagiario', {'fields':('parecer_sobre_o_desempenho_do_estagiario',)}),
         ('4. Supervisão',{'fields':
-            ('modalidade_de_supervisao','horas_orientador','horas_supervisor')})
-        )
+            ('modalidade_de_supervisao','horas_orientador','horas_supervisor')}),
+        (None, {'fields':
+            ('avaliado',)}),
+    )
+
+    list_filter = ('avaliado',)
      
     radio_fields = {"assiduidade":admin.HORIZONTAL,
                     "criatividade":admin.HORIZONTAL,

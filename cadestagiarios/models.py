@@ -45,6 +45,9 @@ class ConjAtividade(models.Model):
     
     def __unicode__(self):
         return self.descricaoounome
+
+    class Meta:
+        verbose_name = 'Conj. de Atividades'
     
 class Atividade(models.Model):
     conjatividade = models.ForeignKey(ConjAtividade)
@@ -56,16 +59,26 @@ class ConjAtividadeEspecifica(models.Model):
     def __unicode__(self):
         return self.descricaoounome
 
+    class Meta:
+        verbose_name = 'Conj. de Atividades Especificas'
+        verbose_name_plural = 'Conjuntos de Ativ. Espec.'
 #Atividade especifica do curso do estudante
 class AtividadeEspecifica(models.Model):
     conjatividade = models.ForeignKey(ConjAtividadeEspecifica)
     atividade = models.TextField()
+
+    class Meta:
+        verbose_name_plural = 'Atividades Especificas'
 
 class ConjConjAtividades(models.Model):
     descricaoounome = models.CharField('Descrição', max_length=25)
     atividadesdoprojeto = models.ForeignKey(ConjAtividade)
     atividadesdafuncao = models.ForeignKey(ConjAtividadeEspecifica)
     #atividadesdocurso = models.ForeignKey(ConjAtividade)
+
+    class Meta:
+        verbose_name = 'Conj. de conj. de atividades'
+        verbose_name_plural = 'Conjuntos de conj. de atividades'
 
 class Coordenador(models.Model):
     nome = models.CharField(max_length=45)
@@ -76,8 +89,9 @@ class Coordenador(models.Model):
     def __unicode__(self):
         return self.nome
     
-    #class Meta:
-    #    ordering = ('nome',)
+    class Meta:
+        ordering = ('nome',)
+        verbose_name_plural = 'Coordenadores'
         
 class SubProjeto(models.Model):
     BALNRES = (('Balneabilidade','Balneabilidade'),('Resíduos','Resíduos'),('QG','Administração'),('ARRUMAR','ARRUMAR'))
@@ -97,8 +111,9 @@ class InstituicaoDeEnsino(models.Model):
     def __unicode__(self):
         return self.nome
     
-    #class Meta:
-    #    ordering = ('nome',)
+    class Meta:
+        ordering = ('nome',)
+        verbose_name_plural = 'Instituições de Ensino'
         
 class Curso(models.Model):
     nome_do_curso = models.CharField(max_length = 100)
@@ -227,8 +242,9 @@ class Local(models.Model):
     def __unicode__(self):
         return self.nome_do_local
         
-    #class Meta:
+    class Meta:
     #    ordering = ('nome_do_local',)
+        verbose_name_plural = 'Locais'
     
 #class Contrato(models.Model):
 #    local_atual = models.ForeignKey(Local)
@@ -239,12 +255,18 @@ class EstadoDoDocumento(models.Model):
     
     def __unicode__(self):
         return self.estado
+
+    class Meta:
+        verbose_name_plural = 'Estados dos Documentos'
     
 class TipoDeDocumento(models.Model):
     tipo = models.CharField(max_length=60)
     
     def __unicode__(self):
         return self.tipo
+
+    class Meta:
+        verbose_name_plural = 'Tipos de Documento'
     
 class Documento(models.Model):
     estagiario = models.ForeignKey(Estagiario)
@@ -274,8 +296,9 @@ class TipoDePendencia(models.Model):
     def __unicode__(self):
         return self.tipo
         
-    #class Meta:
+    class Meta:
     #    ordering = ('tipo',)
+        verbose_name_plural = 'Tipos de Pendencia'
         
 class Pendencia(models.Model):
     estagiario = models.ForeignKey(Estagiario)
@@ -293,6 +316,9 @@ class TipoDeContatamento(models.Model):
     
     def __unicode__(self):
         return self.descricao_do_tipo
+
+    class Meta:
+        verbose_name_plural = 'Tipos de Contatamento'
     
 class Contatamento(models.Model):
     estagiario = models.ForeignKey(Estagiario)
@@ -312,6 +338,9 @@ class Instituicao(models.Model):
     
     def __unicode__(self):
         return self.nome
+
+    class Meta:
+        verbose_name_plural = 'Instituições'
     
 class Contato(models.Model):
     nome = models.CharField(max_length = 75)
@@ -327,6 +356,9 @@ class ItemFotografado(models.Model):
     
     def __unicode__(self):
         return self.nome
+
+    class Meta:
+        verbose_name_plural = 'Itens Fotografados'
         
 class Foto(models.Model):
     desc = models.CharField(max_length = 200, blank=True)
@@ -351,7 +383,7 @@ MODALIDADE_DE_SUPERVISAO = (('D','Direta'), ('S','Semi-Direta'), ('I', 'Indireta
 
 class AvaliacaoDeEstagiario(models.Model):
     operacao = models.ForeignKey(AvaliacaoDeTodosOsEstagiarios)
-    estagiario = models.ForeignKey(Estagiario)
+    estagiario = models.ForeignKey(Estagiario, unique=True)
     assiduidade = models.CharField(max_length=2, choices = CRITERIOS)
     criatividade = models.CharField(max_length=2, choices = CRITERIOS)
     iniciativa = models.CharField(max_length=2, choices = CRITERIOS)
@@ -367,6 +399,7 @@ class AvaliacaoDeEstagiario(models.Model):
                 help_text = "Definir qual a modalidade de supervisão") #jteste #testando #ok pass 
     horas_orientador = models.FloatField()
     horas_supervisor = models.FloatField()
+    avaliado = models.BooleanField()
 
     def __unicode__(self):
         return self.estagiario.nome_do_estagiario
@@ -374,4 +407,3 @@ class AvaliacaoDeEstagiario(models.Model):
     class Meta:
         verbose_name_plural = "Avaliações de Estagiários" 
 
-#teste
