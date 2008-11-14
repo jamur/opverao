@@ -105,7 +105,8 @@ class AvaliacaoDeEstagiarioOptions(admin.ModelAdmin):
         ('1. Identificação do Estagiário', {'fields':(
             'operacao','estagiario')}),
         ('2. Critérios para Avaliação', {'fields':
-            ('assiduidade','criatividade','iniciativa','responsabilidade',
+            ('avaliacao_unica',
+             'assiduidade','criatividade','iniciativa','responsabilidade',
              'conduta','dominio_do_conhecimento_tecnico',
              'dominio_de_habilidades_necessarias_ao_desempenho','outros',
              'total_de_horas_efetivamente_realizadas',)}),
@@ -118,7 +119,8 @@ class AvaliacaoDeEstagiarioOptions(admin.ModelAdmin):
 
     list_filter = ('avaliado',)
      
-    radio_fields = {"assiduidade":admin.HORIZONTAL,
+    radio_fields = {"avaliacao_unica":admin.HORIZONTAL,
+                    "assiduidade":admin.HORIZONTAL,
                     "criatividade":admin.HORIZONTAL,
                     "iniciativa":admin.HORIZONTAL,
                     "responsabilidade":admin.HORIZONTAL,

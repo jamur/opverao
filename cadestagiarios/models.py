@@ -384,6 +384,7 @@ MODALIDADE_DE_SUPERVISAO = (('D','Direta'), ('S','Semi-Direta'), ('I', 'Indireta
 class AvaliacaoDeEstagiario(models.Model):
     operacao = models.ForeignKey(AvaliacaoDeTodosOsEstagiarios)
     estagiario = models.ForeignKey(Estagiario, unique=True)
+    avaliacao_unica = models.CharField(max_length=2, choices = CRITERIOS)
     assiduidade = models.CharField(max_length=2, choices = CRITERIOS)
     criatividade = models.CharField(max_length=2, choices = CRITERIOS)
     iniciativa = models.CharField(max_length=2, choices = CRITERIOS)
