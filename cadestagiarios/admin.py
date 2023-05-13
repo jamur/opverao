@@ -22,6 +22,9 @@ class Contatamento_Inline(admin.TabularInline):
 class Foto_Inline(admin.TabularInline):
     model = Foto
 
+#class Foto(admin.ModelAdmin):
+#    model = Foto
+
 class DocumentoOptions(admin.ModelAdmin):
     list_display = ('estagiario','tipo_de_documento','local_atual','preenchido','assinado')
     list_filter = ('tipo_de_documento','local_atual','data_de_envio_ou_chegada','preenchido','assinado','estagiario')
@@ -89,6 +92,11 @@ class ConjAtividadeEspecificaOptions(admin.ModelAdmin):
 class ItemFotografadoOptions(admin.ModelAdmin):
     inlines = [Foto_Inline]
 
+class FotoOptions(admin.ModelAdmin):
+    fields = ( 'image_link', 'image_tag', 'desc', 'foto', 'item_fotografado')
+    readonly_fields = ('image_link', 'image_tag',)
+    #readonly_fields = ['img_preview']
+
 class EstadoDoDocumentoOptions(admin.ModelAdmin):
     list_filter = ('estado',)
 
@@ -155,9 +163,11 @@ admin.site.register(TipoDeContatamento)
 admin.site.register(ConjAtividadeEspecifica, ConjAtividadeEspecificaOptions)
 admin.site.register(SubProjeto)
 admin.site.register(ItemFotografado, ItemFotografadoOptions)
+admin.site.register(Foto, FotoOptions)
 admin.site.register(EstadoDoDocumento, EstadoDoDocumentoOptions)
 admin.site.register(Banco, BancoOptions)
 admin.site.register(TipoDePendencia)
 admin.site.register(Pendencia, PendenciaOptions)
 admin.site.register(AvaliacaoDeEstagiario, AvaliacaoDeEstagiarioOptions)
 admin.site.register(AvaliacaoDeTodosOsEstagiarios)
+

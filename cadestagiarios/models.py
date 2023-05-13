@@ -2,6 +2,8 @@
 
 from django.db import models
 from datetime import date
+from django.utils.html import escape
+
 
 # Create your models here.
 class Banco(models.Model):
@@ -159,7 +161,7 @@ class Estagiario(models.Model):
     nome_da_mae = models.CharField(max_length=65, null=True, blank=True)
     data_nasc_mae = models.DateField(null=True, blank=True)
 
-    estudante_da_ufpr = models.BooleanField('Estuda na UFPR?', null=True, blank=True)
+    estudante_da_ufpr = models.BooleanField('Estuda na UFPR?', blank=True)
     
     #local_do_contrato = models.ForeignKey('Local')
     #local_do_xerox_da_identidade = models.ManyToManyField('Local')
@@ -178,10 +180,10 @@ class Estagiario(models.Model):
     conta_corrente = models.CharField(max_length = 25, blank=True, null=True)
     agencia = models.CharField(max_length = 10, blank=True, null=True)
     banco = models.ForeignKey(Banco, null=True, blank=True)
-    falta_pagamento = models.BooleanField('Não Recebeu', null=True, blank=True)
-    reclamou_pagamento = models.BooleanField('Reclamou Pag.', null=True, blank=True)
+    falta_pagamento = models.BooleanField('Não Recebeu', blank=True)
+    reclamou_pagamento = models.BooleanField('Reclamou Pag.', blank=True)
     obs = models.TextField(null=True, blank=True)
-    verificar_pagamento = models.BooleanField('Verif. Pag.', null=True, blank=True)
+    verificar_pagamento = models.BooleanField('Verif. Pag.', blank=True)
     curso = models.ForeignKey(Curso, null=True, blank=True)
     pagamento_pendente = models.DecimalField(max_digits=7, decimal_places = 2, null=True, blank=True)
 
@@ -274,8 +276,8 @@ class Documento(models.Model):
     tipo_de_documento = models.ForeignKey(TipoDeDocumento, blank=True, null=True)
     local_atual = models.ForeignKey(Local, blank=True, null=True)
     data_de_envio_ou_chegada = models.DateTimeField(blank=True, null=True)
-    preenchido = models.BooleanField(blank=True, null=True)
-    assinado = models.BooleanField(blank=True, null=True)
+    preenchido = models.BooleanField(blank=True)
+    assinado = models.BooleanField(blank=True)
     estado = models.ForeignKey(EstadoDoDocumento, null=True, blank=True)
     obs = models.CharField(max_length=100, blank=True, null=True)
     
@@ -362,9 +364,25 @@ class ItemFotografado(models.Model):
         
 class Foto(models.Model):
     desc = models.CharField(max_length = 200, blank=True)
-    foto = models.ImageField(upload_to="fotos")
+    foto = models.ImageField(upload_to="media")
     item_fotografado = models.ForeignKey(ItemFotografado)
+
+    def __unicode__(self):
+        return self.item_fotografado.nome + " - " + self.desc
+
+    def img_preview(self):
+        return "<img src = '{url}' width = '300'/>".format( url = self.foto.url)
     
+    def image_tag(self):
+        return u'<img src="%s" />' % escape(self.foto.path)
+    
+    def image_link(self):
+        url = escape(self.foto.url)
+        return u'<a href="%s">%s</a>' % (url, url)
+
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True
+        
 class AvaliacaoDeTodosOsEstagiarios(models.Model):
     """Compreende a avaliação de todos os estagiários, o conjunto """
     nome_da_operacao = models.CharField(max_length=50)
